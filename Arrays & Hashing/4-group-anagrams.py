@@ -6,7 +6,7 @@ from typing import List
 from collections import defaultdict
 
 class Solution(object):
-# Option 1: Sort the 
+# Option 1: Sort the words then compare them and pull the originals that are anagrams with each other into a group
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         """
         :type strs: List[str]
@@ -34,9 +34,29 @@ class Solution(object):
             output.append(group)
 
         return output
-
-# Create hashmap with key being the count for each letter and value being the words that are anagrams with the same count for each letter
+    
+# Option 2: Using dict to group the words that are sorted on the spot. Then put all the values in a list.
     def groupAnagrams2(self, strs: List[str]) -> List[List[str]]:
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        dictionary = {}
+        for word in strs:
+            sorted_word = ''.join(sorted(word))
+            if sorted_word not in dictionary:
+                dictionary[sorted_word] = [word]
+            else:
+                dictionary[sorted_word].append(word)
+        
+        output = []
+        for value in dictionary.values():
+            output.append(value)
+        return output
+        
+
+# Option 3: Create hashmap, using defaultdict and tuple, with key being the count for each letter and value being the words that are anagrams with the same count for each letter
+    def groupAnagrams3(self, strs: List[str]) -> List[List[str]]:
         """
         :type strs: List[str]
         :rtype: List[List[str]]
@@ -66,8 +86,10 @@ strs3 = ["a"]
 
 print(test.groupAnagrams(strs1))
 print(test.groupAnagrams(strs2))
-print(test.groupAnagrams(strs3))
-print("\n")
+print(test.groupAnagrams(strs3), end="\n\n")
 print(test.groupAnagrams2(strs1))
 print(test.groupAnagrams2(strs2))
-print(test.groupAnagrams2(strs3))
+print(test.groupAnagrams2(strs3), end ="\n\n")
+print(test.groupAnagrams3(strs1))
+print(test.groupAnagrams3(strs2))
+print(test.groupAnagrams3(strs3), end="\n\n")
