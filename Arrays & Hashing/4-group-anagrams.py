@@ -41,14 +41,20 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        dictionary = {}
-        for word in strs:
+        dictionary = {} 
+        # Sort each word one by one and put them in a dictionary, as the keys, if they aren't already then with sorted word as key add words that are anagrams as the value.
+        for word in strs: 
             sorted_word = ''.join(sorted(word))
+            # If there is no key for sorted word yet, initialize it with word
             if sorted_word not in dictionary:
                 dictionary[sorted_word] = [word]
+            # Else add word to dict of sorted word
             else:
                 dictionary[sorted_word].append(word)
-        
+            print(f"{dictionary}")
+
+        print("")        
+        # Put in anagram values from dict to a list for output
         output = []
         for value in dictionary.values():
             output.append(value)
@@ -66,12 +72,14 @@ class Solution(object):
         for word in strs:
             count = [0] * 26 # count for each char a .. z
             for char in word:
+                # increment index based on letter for the word
                 count[ord(char) - ord("a")] += 1 
+            # use tuple to store the list as a key value then append word as value to the defaultdict
             output[tuple(count)].append(word)
-        
+
+        # only need the values of the default dict
         return output.values()
             
-
         
 test = Solution()
 
