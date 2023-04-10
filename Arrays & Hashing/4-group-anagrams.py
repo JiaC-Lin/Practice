@@ -51,9 +51,8 @@ class Solution(object):
             # Else add word to dict of sorted word
             else:
                 dictionary[sorted_word].append(word)
-            print(f"{dictionary}")
-
-        print("")        
+            # print(f"{dictionary}")
+                
         # Put in anagram values from dict to a list for output
         output = []
         for value in dictionary.values():
@@ -61,8 +60,8 @@ class Solution(object):
         return output
         
 
-# Option 3: Create hashmap, using defaultdict and tuple, with key being the count for each letter and value being the words that are anagrams with the same count for each letter
-    def groupAnagrams3(self, strs: List[str]) -> List[List[str]]:
+# Option 3: Create hashmap, using defaultdict and tuple, with key being the COUNT for each letter and value being the words that are anagrams with the same count for each letter
+    def neetGroupAnagrams(self, strs: List[str]) -> List[List[str]]:
         """
         :type strs: List[str]
         :rtype: List[List[str]]
@@ -98,6 +97,6 @@ print(test.groupAnagrams(strs3), end="\n\n")
 print(test.groupAnagrams2(strs1))
 print(test.groupAnagrams2(strs2))
 print(test.groupAnagrams2(strs3), end ="\n\n")
-print(test.groupAnagrams3(strs1))
-print(test.groupAnagrams3(strs2))
-print(test.groupAnagrams3(strs3), end="\n\n")
+print(test.neetGroupAnagrams(strs1))
+print(test.neetGroupAnagrams(strs2))
+print(test.neetGroupAnagrams(strs3), end="\n\n")
