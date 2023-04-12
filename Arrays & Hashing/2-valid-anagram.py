@@ -17,11 +17,13 @@ class Solution:
         countS = dict()
         countT = dict()
 
-        for n in range(len(s)):
+        for n in range(len(s)): 
+            # increment character by one everytime we see it with the default value for key to be 0; countS[s[n]] += 1 with countS[s[n]] initialzed with 0
             countS[s[n]] = 1 + countS.get(s[n], 0)
             countT[t[n]] = 1 + countT.get(t[n], 0)
-        print(countS)
-        if countS == countT:
+        print(countS, countT)
+
+        if countS == countT: # compare the letter counts, with dict, in both words
             return True
         else:
             return False 

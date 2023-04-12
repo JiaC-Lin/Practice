@@ -4,6 +4,7 @@
 from typing import List
 
 class Solution(object):
+# Option 1: using (num : count) as the dict. Fill in output with top k most frequent elements by initializing with k nums, then comparing down the list.
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         """
         :type nums: List[int]
@@ -18,21 +19,23 @@ class Solution(object):
             if n not in countDict: # skips recurring values; they're already counted
                 value = nums.count(n)
                 countDict[n] = value
-        # print(f"{countDict}")
+        print(f"{countDict}")
 
         lenK = k # save copy of k
         i = 0
         for key in countDict: # iterate through each numValue
             if k != 0: # fill/initialize in output up to k numValues
-                output[i] = key
+                output[i] = key 
                 i += 1
                 k -= 1
-            else: # comparison for only the most frequent ones
-                for index in reversed(range(lenK)): 
-                    valueKey = output[index]
-                    if countDict.get(valueKey) < countDict.get(key):
-                        output[index] = key
-        # print(f"{output}")
+            else: # comparison for only the most frequent ones 
+                for i in range(lenK):
+                    numValue = output[i] # init and hold value
+                    if countDict.get(numValue) < countDict.get(key):
+                        output[i] = key
+                        key = numValue
+                        # Then continue to compare with the old numValue with the rest of the output array; countDict.get(numvalue) < countDict.get(oldNumValue)
+        print(f"{output}")
         return output
     
     def neetTopKFrequent(self, nums: List[int], k: int) -> List[int]:
@@ -65,13 +68,13 @@ num1 = [1, 1, 1, 2, 2, 3]
 # k = 1, Output: [1]
 num2 = [1]
 
-# K = 1, Output: [100]
-num3 = [1, 1, 2, 4, 5, 5, 100, 90, 90, 90]
+# K = 2, Output: [2, 3]
+num3 = [1, 2, 2, 3, 3, 3, 4, 5, 5, 5, 5, 6]
 
 test.topKFrequent(num1, 2)
 test.topKFrequent(num2, 1)
-test.topKFrequent(num3, 1)
+test.topKFrequent(num3, 2)
 
 test.neetTopKFrequent(num1, 2)
 test.neetTopKFrequent(num2, 1)
-test.neetTopKFrequent(num3, 1)
+test.neetTopKFrequent(num3, 2)
