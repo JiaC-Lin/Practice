@@ -7,18 +7,17 @@
 from typing import List
 
 class Solution(object):
+# Can be split into 2 arrays, one carrying the multiplication before nums[i] and one carrying multiplication after nums[i]
+#    [ 1 , 2 , 3 , 4]       <- nums
+# [1 , 1 , 2 , 6 , 24]      <- forward multiplcation -- one for loop
+#    [ 24, 24, 12, 4 , 1] <- backward multiplcation -- second for loop
+# answer[i] = forward[i] * backward[i + 1] -- third for loop
+# O(3N + 2) or O(N) time
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         """
         :type nums: List[int]
         :rtype: List[int]
         """
-        # Can be split into 2 arrays, one carrying the multiplication before nums[i] and one carrying multiplication after nums[i]
-        #    [ 1 , 2 , 3 , 4]       <- nums
-        # [1 , 1 , 2 , 6 , 24]      <- forward multiplcation -- one for loop
-        #    [ 24, 24, 12, 4 , 1] <- backward multiplcation -- second for loop
-        # answer[i] = forward[i] * backward[i + 1] -- third for loop
-        # O(3N + 2) or O(N) time
-
         foward = [1] # make an array to hold foward multiplication
         for i in range(len(nums)):
             previousForward = foward[i]
@@ -41,8 +40,12 @@ class Solution(object):
 
         # print(f"{output}")
         return output
-
-class Solution(object):
+    
+# Condensed Way -- will not include the last of 'foward' and first of 'backward' 
+# [1 , 2 , 3 , 4] <- nums
+# [1 , 1 , 2 , 6] <- forward multiplcation with 1 as prefix
+# [24, 12, 4 , 1] <- backward multiplcation with 1 as postfix
+# O(2N) or O(N)
     def neetProductExceptSelf(self, nums: List[int]) -> List[int]:
         """
         :type nums: List[int]
@@ -53,11 +56,11 @@ class Solution(object):
         prefix = 1
         for i in range(len(nums)):
             answer[i] = prefix
-            prefix *= nums[i]
+            prefix *= nums[i] # set next prefix to be added into answer array
         postfix = 1
-        for i in range(len(nums) - 1, -1, -1):
+        for i in range(len(nums) - 1, -1, -1): # backwards
             answer[i] *= postfix
-            postfix *= nums[i]
+            postfix *= nums[i] # set next postifx to be added into answer array
         return answer
 
 
@@ -71,3 +74,6 @@ nums2 = [-1,1,0,-3,3]
 
 test.productExceptSelf(nums1)
 test.productExceptSelf(nums2)
+
+test.neetProductExceptSelf(nums1)
+test.neetProductExceptSelf(nums2)
