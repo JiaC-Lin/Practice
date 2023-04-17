@@ -18,7 +18,7 @@ class Solution:
                 strs[i] = strs[i].replace(";", ";;")
             # combine the spacer and the word with string
             string += (":;" + strs[i]) 
-        print(string)
+        # print(string)
         return string
     
     def decode(self, s: str) -> List[str]:
@@ -54,7 +54,7 @@ class Solution:
             else:
                 output.append(addedWord)
                 start = ending + 2 # index of where the next word starts"
-        print(f"{output}")
+        # print(f"{output}")
         return output
 
 test = Solution()
