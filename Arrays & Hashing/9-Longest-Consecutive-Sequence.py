@@ -11,7 +11,44 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        
+        output = 0
+        firstToCount = {}
+        # get starting numbers as key of dict
+        for n in nums:
+            previous = n - 1
+            if previous in nums: # not the first of a sequence
+                continue
+            else:
+                firstToCount[n] = 1 # initialize the start of a sequence 
+        # print(f"{firstToCount}")
+        # count the number of elements for each sequence of starting nums
+        for n, c in firstToCount.items():
+            nextn = n + 1
+            # if there is no next number; sequence ends -> loop exits
+            while nextn in nums:
+                c += 1 # add to count
+                firstToCount[n] = c
+                nextn += 1 # grab the number after nextn in the sequence
+            # get largest sequence
+            if c > output:
+                output = c
+        # print(f"{output}")
+        # find highest num with highest count
+        return output
+    
+# A more condensed solution
+    def neetLongestConsecutive(self, nums: List[int]) -> int:
+        numSet = set(nums)
+        longest = 0
+
+        for n in nums:
+            # check if its the start of a sequence
+            if (n - 1) not in numSet:
+                length = 1
+                while (n + length) in numSet:
+                    length += 1
+                longest = max(length, longest)
+        return longest
 
 nums1 = [100,4,200,1,3,2]
 # Output: 4
