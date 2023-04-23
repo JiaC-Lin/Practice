@@ -42,12 +42,13 @@ class Solution(object):
         longest = 0
 
         for n in nums:
-            # check if its the start of a sequence
+            # check if its the first element of sequence then get length of sequence
             if (n - 1) not in numSet:
                 length = 1
                 while (n + length) in numSet:
                     length += 1
-                longest = max(length, longest)
+                # compare the new length with current longest
+                longest = max(length, longest) 
         return longest
 
 nums1 = [100,4,200,1,3,2]
