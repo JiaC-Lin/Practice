@@ -38,17 +38,17 @@ class Solution(object):
     
 # A more condensed solution
     def neetLongestConsecutive(self, nums: List[int]) -> int:
-        numSet = set(nums)
         longest = 0
 
         for n in nums:
             # check if its the first element of sequence then get length of sequence
-            if (n - 1) not in numSet:
+            if (n - 1) not in nums:
                 length = 1
-                while (n + length) in numSet:
+                while (n + length) in nums:
                     length += 1
                 # compare the new length with current longest
-                longest = max(length, longest) 
+                longest = max(length, longest)
+        # print(longest) 
         return longest
 
 nums1 = [100,4,200,1,3,2]
@@ -62,3 +62,6 @@ test = Solution()
 
 test.longestConsecutive(nums1)
 test.longestConsecutive(nums2)
+
+test.neetLongestConsecutive(nums1)
+test.neetLongestConsecutive(nums2)
