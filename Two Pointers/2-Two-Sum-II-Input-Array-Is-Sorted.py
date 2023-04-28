@@ -16,17 +16,22 @@ class Solution():
         :type target: int
         :rtype: List[int]
         """
+        # pointers
         small = 0
         big = len(numbers) - 1
 
+        # use while loop instead of for loop to stop earlier than going through unnecessary numbers again, if there is no solution
         while small < big:
             added = numbers[small] + numbers[big] 
-            if added == target:
-                print([small + 1, big + 1])
+            # just right
+            if added == target: 
+                # print([small + 1, big + 1])
                 return [small + 1, big + 1]
-            if added > target: # too big
+            # too big
+            if added > target: 
                 big -= 1
-            if added < target: # too small
+            # too small
+            if added < target: 
                 small += 1
         return False
 
