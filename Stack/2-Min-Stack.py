@@ -11,7 +11,7 @@
 
 class MinStack():
 # initialize the arrays used by all functions
-    def __init__(self):
+    def __init__(self) -> None:
         self.stack = []
         # give a min value to each element in stack since we are only pushing and popping elements
         self.minStack = []
@@ -38,7 +38,7 @@ class MinStack():
         """
         :rtype: int
         """
-        print (self.stack[-1])
+        # print (self.stack[-1])
         return self.stack[-1]
 
 # return the minimum value correctlating to the top most element of stack
@@ -46,14 +46,47 @@ class MinStack():
         """
         :rtype: int
         """
-        print(self.minStack[-1])
+        # print(self.minStack[-1])
         return self.minStack[-1]
+
+
+# min stack using tuples because it is generally more memory efficient and faster lookup than lists. Store the 
+class MinimumStack():
+    def __init__(self) -> None:
+        self.stack = []
+
+    def push(self, val: int) -> None:
+        if not self.stack:
+            self.stack.append((val, val))
+        else:
+            minVal = min(val, self.stack[-1][1])
+            self.stack.append((val, minVal))
+
+    def pop(self) -> None:
+        self.stack.pop()
+
+    def top(self) -> int:
+        print(self.stack[-1][0])
+        return self.stack[-1][0]
+
+    def getMin(self) -> int:
+        print(self.stack[-1][1])
+        return self.stack[-1][1]
 
 # Input:
 # ["MinStack","push","push","push","getMin","pop","top","getMin"]
 # [[],[-2],[0],[-3],[],[],[],[]]
 
 minStack = MinStack()
+minStack.push(-2)
+minStack.push(0)
+minStack.push(-3)
+minStack.getMin()   # return -3
+minStack.pop()
+minStack.top()      # return 0
+minStack.getMin()   # return -2
+
+minStack = MinimumStack()
 minStack.push(-2)
 minStack.push(0)
 minStack.push(-3)
