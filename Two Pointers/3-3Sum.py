@@ -20,7 +20,7 @@ class Solution():
         size = len(nums)
         for i in range(size):
             a = nums[i]
-            # Skip any duplicates by checking if (a) is the same
+            # Skip any duplic5ates by checking if (a) is the same
             if ((i > 0) and (a == nums[i-1])):
                 continue 
             # Set-Up 2sum
@@ -32,10 +32,10 @@ class Solution():
                 total = nums[b] + nums[c]
                 if total < target:
                     b += 1
-                if total > target:
+                elif total > target:
                     c -= 1
                 # add solution to output and keep checking rest of nums
-                if total == target:
+                else:
                     output.append([a, nums[b], nums[c]])
                     b += 1
         # print(output)
